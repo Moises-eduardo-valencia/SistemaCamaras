@@ -16,8 +16,9 @@
       <span class="font-bold text-lg tracking-wide">SistemaCamaras</span>
     </div>
     <div class="flex items-center gap-5">
-      <a href="{% url 'registrar_camara' %}" class="hover:underline text-sm">Registrar Cámara</a>
-      <a href="{% url 'lista_camaras' %}" class="hover:underline text-sm">Lista de Cámaras</a>
+      <a href="{% url 'lista_camaras' %}" class="hover:underline text-sm">Cámaras</a>
+      <a href="{% url 'lista_mantenimientos' %}" class="hover:underline text-sm">Mantenimientos</a>
+      <a href="{% url 'lista_destinatarios' %}" class="hover:underline text-sm">Destinatarios</a>
       {% if user.is_authenticated %}
       <span class="text-gray-400 text-sm">{{ user.username }}</span>
       <form method="post" action="{% url 'logout' %}" class="inline">

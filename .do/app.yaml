@@ -1,0 +1,54 @@
+name: sistema-camaras
+
+services:
+  - name: web
+    github:
+      repo: TU_USUARIO/SistemaCamaras   # <-- actualizar
+      branch: v1
+      deploy_on_push: true
+    build_command: pip install uv && uv sync && uv run python manage.py collectstatic --noinput
+    run_command: uv run gunicorn Proyecto.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    http_port: 8080
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    envs:
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "${APP_DOMAIN}"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://${APP_DOMAIN}"
+      - key: SECRET_KEY
+        type: SECRET
+        value: "PEGAR_AQUI_TU_SECRET_KEY"
+      - key: DBURL
+        type: SECRET
+        value: "PEGAR_AQUI_TU_DBURL"
+      - key: USE_SPACES
+        value: "True"
+      - key: SPACES_KEY
+        type: SECRET
+        value: "PEGAR_AQUI_SPACES_KEY"
+      - key: SPACES_SECRET
+        type: SECRET
+        value: "PEGAR_AQUI_SPACES_SECRET"
+      - key: SPACES_BUCKET
+        value: "disco-loginco"
+      - key: SPACES_ENDPOINT
+        value: "https://sfo3.digitaloceanspaces.com"
+      - key: SPACES_CDN_ENDPOINT
+        value: "disco-loginco.sfo3.digitaloceanspaces.com"
+      - key: SPACES_REGION
+        value: "sfo3"
+      - key: EMAIL_HOST_PASSWORD
+        type: SECRET
+        value: "PEGAR_AQUI_SENDGRID_API_KEY"
+
+jobs:
+  - name: migrate
+    github:
+      repo: TU_USUARIO/SistemaCamaras   # <-- actualizar (igual que services)
+      branch: v1
+    run_command: uv run python manage.py migrate --noinput
+    instance_size_slug: basic-xxs
+    kind: PRE_DEPLOY

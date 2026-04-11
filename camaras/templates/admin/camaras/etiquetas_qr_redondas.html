@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Etiquetas QR Redondas — Cámaras</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    /* ── Controles (solo pantalla) ── */
+    @media screen {
+      .controles {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #417690;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+      }
+      .controles a {
+        color: #d0e8f5;
+        text-decoration: none;
+        font-size: 12px;
+      }
+      .btn-imprimir {
+        background: #fff;
+        color: #417690;
+        border: none;
+        padding: 6px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      .btn-imprimir:hover { background: #e8f4fb; }
+
+      .seccion-empresa {
+        margin: 24px 20px 0;
+      }
+      .titulo-empresa {
+        font-size: 15px;
+        font-weight: bold;
+        color: #417690;
+        border-bottom: 2px solid #417690;
+        padding-bottom: 4px;
+        margin-bottom: 16px;
+      }
+      .grid-etiquetas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+    }
+
+    /* ── Etiqueta redonda ── */
+    .etiqueta {
+      width: 5cm;
+      height: 5cm;
+      border-radius: 50%;
+      border: 1.5px solid #888;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 0.35cm;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      overflow: hidden;
+    }
+
+    .etiqueta__qr img {
+      width: 2.9cm;
+      height: 2.9cm;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .etiqueta__nombre {
+      font-size: 7.5px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.2;
+      color: #111;
+      max-width: 3.8cm;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .etiqueta__ip {
+      font-size: 7px;
+      text-align: center;
+      color: #444;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Impresión ── */
+    @media print {
+      body { background: #fff; }
+
+      .controles { display: none; }
+
+      .seccion-empresa {
+        margin: 0;
+        padding-top: 10pt;
+      }
+
+      .titulo-empresa {
+        font-size: 10pt;
+        font-weight: bold;
+        border-bottom: 1pt solid #000;
+        padding-bottom: 2pt;
+        margin-bottom: 8pt;
+        color: #000;
+      }
+
+      .grid-etiquetas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10pt;
+        margin-bottom: 16pt;
+      }
+
+      .etiqueta {
+        width: 5cm;
+        height: 5cm;
+        border: 1pt solid #555;
+        padding: 0.3cm;
+        gap: 2px;
+      }
+
+      .etiqueta__qr img {
+        width: 2.8cm;
+        height: 2.8cm;
+      }
+
+      .etiqueta__nombre {
+        font-size: 6.5pt;
+      }
+
+      .etiqueta__ip {
+        font-size: 6pt;
+      }
+
+      @page {
+        size: letter;
+        margin: 1.5cm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de controles (solo pantalla) -->
+  <div class="controles">
+    <strong>Etiquetas QR Redondas — Cámaras</strong>
+    <button class="btn-imprimir" onclick="window.print()">Imprimir</button>
+    <a href="{% url 'admin:camaras_camara_changelist' %}">← Volver al listado</a>
+  </div>
+
+  <!-- Etiquetas agrupadas por empresa -->
+  {% for empresa, camaras in grupos.items %}
+    <div class="seccion-empresa">
+      <div class="titulo-empresa">{{ empresa }}</div>
+      <div class="grid-etiquetas">
+        {% for item in camaras %}
+          <div class="etiqueta">
+            <div class="etiqueta__qr">
+              <img src="data:image/png;base64,{{ item.qr_b64 }}" alt="QR {{ item.camara.nombre }}">
+            </div>
+            <div class="etiqueta__nombre">{{ item.camara.nombre }}</div>
+            <div class="etiqueta__ip">{{ item.camara.ip }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+</body>
+</html>

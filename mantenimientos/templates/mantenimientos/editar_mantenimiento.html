@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Mantenimiento — {{ mant.camara.nombre }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-8 shadow rounded-lg">
+  <h2 class="text-xl font-bold text-gray-800 mb-6">
+    Editar Mantenimiento — {{ mant.camara.nombre }}
+  </h2>
+
+  <form method="post" action="{% url 'editar_mantenimiento' mant.pk %}">
+    {% csrf_token %}
+
+    <!-- Cámara -->
+    <div class="mb-4">
+      <label for="{{ form.camara.id_for_label }}"
+             class="block text-sm font-medium text-gray-700 mb-1">
+        {{ form.camara.label }}
+      </label>
+      <div class="w-full [&>select]:border [&>select]:border-gray-300 [&>select]:rounded [&>select]:w-full [&>select]:p-2 [&>select]:focus:outline-none [&>select]:focus:ring-2 [&>select]:focus:ring-blue-500 [&>select]:bg-white">
+        {{ form.camara }}
+      </div>
+      {% for error in form.camara.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Fechas — dos columnas -->
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div>
+        <label for="{{ form.fecha_mantenimiento.id_for_label }}"
+               class="block text-sm font-medium text-gray-700 mb-1">
+          {{ form.fecha_mantenimiento.label }}
+        </label>
+        <div class="[&>input]:border [&>input]:border-gray-300 [&>input]:rounded [&>input]:w-full [&>input]:p-2 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:focus:ring-blue-500">
+          {{ form.fecha_mantenimiento }}
+        </div>
+        {% for error in form.fecha_mantenimiento.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+      <div>
+        <label for="{{ form.proxima_fecha.id_for_label }}"
+               class="block text-sm font-medium text-gray-700 mb-1">
+          {{ form.proxima_fecha.label }}
+        </label>
+        <div class="[&>input]:border [&>input]:border-gray-300 [&>input]:rounded [&>input]:w-full [&>input]:p-2 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:focus:ring-blue-500">
+          {{ form.proxima_fecha }}
+        </div>
+        {% for error in form.proxima_fecha.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Checkboxes — grid 2x2 -->
+    <fieldset class="mb-4">
+      <legend class="text-sm font-medium text-gray-700 mb-2">Actividades realizadas</legend>
+      <div class="grid grid-cols-2 gap-3 bg-gray-50 border border-gray-200 rounded p-4">
+        <div class="flex items-center gap-2">
+          {{ form.limpieza_lente }}
+          <label for="{{ form.limpieza_lente.id_for_label }}"
+                 class="text-sm text-gray-700 cursor-pointer">
+            {{ form.limpieza_lente.label }}
+          </label>
+        </div>
+        <div class="flex items-center gap-2">
+          {{ form.limpieza_interior }}
+          <label for="{{ form.limpieza_interior.id_for_label }}"
+                 class="text-sm text-gray-700 cursor-pointer">
+            {{ form.limpieza_interior.label }}
+          </label>
+        </div>
+        <div class="flex items-center gap-2">
+          {{ form.verificacion_conector }}
+          <label for="{{ form.verificacion_conector.id_for_label }}"
+                 class="text-sm text-gray-700 cursor-pointer">
+            {{ form.verificacion_conector.label }}
+          </label>
+        </div>
+        <div class="flex items-center gap-2">
+          {{ form.verificacion_alimentacion }}
+          <label for="{{ form.verificacion_alimentacion.id_for_label }}"
+                 class="text-sm text-gray-700 cursor-pointer">
+            {{ form.verificacion_alimentacion.label }}
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Observaciones -->
+    <div class="mb-6">
+      <label for="{{ form.observaciones.id_for_label }}"
+             class="block text-sm font-medium text-gray-700 mb-1">
+        {{ form.observaciones.label }}
+      </label>
+      <div class="[&>textarea]:border [&>textarea]:border-gray-300 [&>textarea]:rounded [&>textarea]:w-full [&>textarea]:p-2 [&>textarea]:focus:outline-none [&>textarea]:focus:ring-2 [&>textarea]:focus:ring-blue-500 [&>textarea]:resize-y">
+        {{ form.observaciones }}
+      </div>
+      {% for error in form.observaciones.errors %}
+      <p class="text-red-600 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <div class="flex items-center gap-4">
+      <button type="submit"
+              class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+        Actualizar
+      </button>
+      <a href="{% url 'lista_mantenimientos' %}"
+         class="text-gray-500 hover:underline text-sm">
+        Cancelar
+      </a>
+    </div>
+  </form>
+</div>
+{% endblock %}

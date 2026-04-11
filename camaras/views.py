@@ -30,8 +30,26 @@ def registrar_camara(request):
 
 @login_required
 def lista_camaras(request):
+    empresas = (
+        Camara.objects
+        .values_list('empresa', flat=True)
+        .distinct()
+        .order_by('empresa')
+    )
+    empresa_seleccionada = request.GET.get('empresa', '').strip()
+
     camaras = Camara.objects.all()
-    return render(request, 'lista_camaras.html', {'camaras': camaras})
+    if empresa_seleccionada:
+        camaras = camaras.filter(empresa=empresa_seleccionada)
+
+    total = Camara.objects.count()
+
+    return render(request, 'lista_camaras.html', {
+        'camaras': camaras,
+        'empresas': empresas,
+        'empresa_seleccionada': empresa_seleccionada,
+        'total': total,
+    })
 
 
 @login_required

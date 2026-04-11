@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Destinatarios de Reportes{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-bold text-gray-800">Destinatarios de Reportes</h1>
+  <a href="{% url 'agregar_destinatario' %}"
+     class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
+    + Agregar destinatario
+  </a>
+</div>
+
+{% if destinatarios %}
+  {% regroup destinatarios by empresa as grupos %}
+  {% for grupo in grupos %}
+  <div class="mb-6">
+    <h3 class="text-sm font-bold text-gray-600 uppercase tracking-wide bg-gray-100 px-4 py-2 rounded-t-lg">
+      {{ grupo.grouper }}
+    </h3>
+    <div class="bg-white shadow rounded-b-lg overflow-hidden">
+      <table class="w-full">
+        <thead class="bg-gray-50 border-b">
+          <tr>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Correo</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Estado</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dest in grupo.list %}
+          <tr class="border-b hover:bg-gray-50">
+            <td class="px-4 py-3 text-sm">{{ dest.email }}</td>
+            <td class="px-4 py-3">
+              {% if dest.activo %}
+              <span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">Activo</span>
+              {% else %}
+              <span class="bg-gray-100 text-gray-500 text-xs font-semibold px-2 py-1 rounded-full">Inactivo</span>
+              {% endif %}
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <form method="post" action="{% url 'toggle_destinatario' dest.pk %}">
+                  {% csrf_token %}
+                  <button type="submit"
+                          class="text-xs px-2 py-1 rounded border {% if dest.activo %}border-gray-300 text-gray-600 hover:bg-gray-100{% else %}border-green-300 text-green-700 hover:bg-green-50{% endif %}">
+                    {% if dest.activo %}Desactivar{% else %}Activar{% endif %}
+                  </button>
+                </form>
+                <a href="{% url 'eliminar_destinatario' dest.pk %}"
+                   title="Eliminar"
+                   class="text-red-500 hover:text-red-700 transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                    <path d="M10 11v6M14 11v6"/>
+                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                  </svg>
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+<div class="bg-white shadow rounded-lg p-12 text-center text-gray-500">
+  <p class="text-lg">No hay destinatarios registrados.</p>
+  <p class="text-sm mt-2">Agrega correos para recibir los reportes mensuales.</p>
+</div>
+{% endif %}
+{% endblock %}

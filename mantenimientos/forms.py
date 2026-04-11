@@ -1,7 +1,7 @@
 from django import forms
 
 from camaras.models import Camara
-from .models import Mantenimiento
+from .models import Mantenimiento, DestinatarioReporte
 
 
 class CamaraChoiceField(forms.ModelChoiceField):
@@ -39,3 +39,9 @@ class MantenimientoForm(forms.ModelForm):
                 format='%Y-%m-%d',
             ),
         }
+
+
+class DestinatarioReporteForm(forms.ModelForm):
+    class Meta:
+        model = DestinatarioReporte
+        fields = ['empresa', 'email', 'activo']

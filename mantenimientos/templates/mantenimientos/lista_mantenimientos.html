@@ -11,6 +11,32 @@
   </a>
 </div>
 
+{% if empresas %}
+<div class="bg-white shadow rounded-lg px-4 py-3 mb-4 flex flex-wrap items-center gap-2">
+  <span class="text-sm font-medium text-gray-600 mr-1">Filtrar por empresa:</span>
+
+  <a href="{% url 'lista_mantenimientos' %}"
+     class="px-3 py-1 rounded-full text-sm border transition
+            {% if not empresa_seleccionada %}bg-blue-600 text-white border-blue-600{% else %}bg-white text-gray-700 border-gray-300 hover:bg-gray-50{% endif %}">
+    Todas
+  </a>
+
+  {% for empresa in empresas %}
+  <a href="?empresa={{ empresa|urlencode }}"
+     class="px-3 py-1 rounded-full text-sm border transition
+            {% if empresa_seleccionada == empresa %}bg-blue-600 text-white border-blue-600{% else %}bg-white text-gray-700 border-gray-300 hover:bg-gray-50{% endif %}">
+    {{ empresa }}
+  </a>
+  {% endfor %}
+
+  {% if empresa_seleccionada %}
+  <span class="ml-auto text-sm text-gray-500">
+    Mostrando {{ mantenimientos|length }} de {{ total }} mantenimiento{{ total|pluralize:"s" }}
+  </span>
+  {% endif %}
+</div>
+{% endif %}
+
 {% if mantenimientos %}
 <div class="overflow-x-auto">
   <table class="w-full bg-white shadow rounded-lg overflow-hidden">
@@ -79,8 +105,15 @@
 </div>
 {% else %}
 <div class="bg-white shadow rounded-lg p-12 text-center text-gray-500">
+  {% if empresa_seleccionada %}
+  <p class="text-lg">No hay mantenimientos para la empresa "{{ empresa_seleccionada }}".</p>
+  <p class="text-sm mt-2">
+    <a href="{% url 'lista_mantenimientos' %}" class="text-blue-600 hover:underline">Ver todos los mantenimientos</a>
+  </p>
+  {% else %}
   <p class="text-lg">No hay mantenimientos registrados aún.</p>
   <p class="text-sm mt-2">Usa el botón de arriba para registrar el primero.</p>
+  {% endif %}
 </div>
 {% endif %}
 {% endblock %}

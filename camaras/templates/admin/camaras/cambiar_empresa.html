@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>Cambiar empresa</h1>
+
+<p>Se aplicará el cambio a las siguientes <strong>{{ queryset.count }}</strong> cámara(s):</p>
+
+<ul>
+  {% for camara in queryset %}
+    <li>{{ camara }}</li>
+  {% endfor %}
+</ul>
+
+<form method="post">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+
+  {% for camara in queryset %}
+    <input type="hidden" name="{{ action_checkbox_name }}" value="{{ camara.pk }}">
+  {% endfor %}
+  <input type="hidden" name="action" value="cambiar_empresa">
+
+  <p>
+    <button type="submit" name="aplicar" class="button default">Aplicar cambio</button>
+    &nbsp;
+    <a href="{% url 'admin:camaras_camara_changelist' %}" class="button">Cancelar</a>
+  </p>
+</form>
+{% endblock %}

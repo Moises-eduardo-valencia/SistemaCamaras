@@ -25,27 +25,27 @@ Kasu,Vista Patio2,DH-IPC-PDW3849-A180-AS-PV,AC085C0PAGCDDC0,192.168.88.56,d4:43:
 Kasu,Entrada,DH-IPC-PDW3849-A180-AS-PV,AG0A615PAG01568,192.168.88.2,f8:ce:07:4d:f1:2a
 Kasu,CARGA DIECEL,DH-IPC-PDW3849-A180-AS-PV,AA066BBPAG92513,192.168.88.78,d4:43:0e:23:cd:af
 Kasu,Poste Esquina,DH-IPC-PDW3849-A180-AS-PV,AA066BBPAGAA6D2,192.168.88.67,d4:43:0e:23:cd:e1
-LogincoPA,NVR Planta Alta,DHI-NVR2216-16P-I2,9L075BFPAZDD655,192.168.1.223,fc:5f:49:a9:51:82
-LogincoPA,Elevador,DH-IPC-HDBW2441E-S,AC0C277PAG73FBD,192.168.1.6,d4:43:0e:8b:c7:66
-LogincoPA,Area Admin,SND-L6013R,SND-L6013R,192.168.1.119,00:16:6c:f6:4f:6e
-LogincoPA,Team Lupita,DH-IPC-PDW3849-A180-AS-PV,AC085C0PAGADA60,10.1.1.65,d4:43:0e:97:5f:f9
-LogincoPA,Team Sujey,DH-IPC-HDBW2841E-S,BH0AEF6PAG0B2B3,10.1.1.69,c4:aa:c4:9b:6e:97
-LogincoPA,Resepcion,SND-L6013R,SND-L6013R,10.1.1.130,sin MAC
-LogincoPA,Barandal,SND-L6013R,SND-L6013R,10.1.1.129,sin MAC
-LogincoPA,Taem Lupita2,SND-L6013R,SND-L6013R,10.1.1.128,sin MAC
-LogincoPA,Entrada Glosa,DH-IPC-HDBW2441E-S,AC0C277PAG76D96,10.1.1.71,sin MAC
-LogincoPA,Glosa,DH-IPC-PDW3849-A180-AS-PV,9G06ED6PAG31AA5,10.1.1.72,fc:5f:49:54:8b:0f
-LogincoPA,Entrada Glosa2,DH-IPC-HDBW2441E-S,AB0703CPAG90344,10.1.1.73,d4:43:0e:42:35:2e
-Loginco PB,NVR Planta Baja,DH-XVR1B08-I,8H0B75APAZ7E1B8,192.168.1.110,fc:b6:9d:71:51:df
-Loginco PB,Entrada ,dahua,sin numero serie,BNC_1,sin Mac
-Loginco PB,Cochera Principal,Night Owl,sin numero serie,BNC_2,sin Mac
-Loginco PB,Cochera Motos,Night Owl,sin numero serie,BNC_3,sin Mac
-Loginco PB,Elevador,dahua,sin numero serie,BNC_4,sin Mac
-Loginco PB,Porton,Night Owl,sin numero serie,BNC_5,sin Mac
-Loginco PB,Cochera Exterior,dahua,sin numero serie,BNC_6,sin Mac
-Loginco PB,Porton Calle,Night Owl,sin numero serie,BNC_7,sin Mac
-Loginco PB,Cochera interior,Night Owl,sin numero serie,BNC_8,sin Mac
-Loginco Bodega,NVR Bodega,,,,
+Loginco,NVR Planta Alta,DHI-NVR2216-16P-I2,9L075BFPAZDD655,192.168.1.223,fc:5f:49:a9:51:82
+Loginco,Elevador,DH-IPC-HDBW2441E-S,AC0C277PAG73FBD,192.168.1.6,d4:43:0e:8b:c7:66
+Loginco,Area Admin,SND-L6013R,SND-L6013R,192.168.1.119,00:16:6c:f6:4f:6e
+Loginco,Team Lupita,DH-IPC-PDW3849-A180-AS-PV,AC085C0PAGADA60,10.1.1.65,d4:43:0e:97:5f:f9
+Loginco,Team Sujey,DH-IPC-HDBW2841E-S,BH0AEF6PAG0B2B3,10.1.1.69,c4:aa:c4:9b:6e:97
+Loginco,Resepcion,SND-L6013R,SND-L6013R,10.1.1.130,00:00:00:00:00:00
+Loginco,Barandal,SND-L6013R,SND-L6013R,10.1.1.129,00:00:00:00:00:00
+Loginco,Taem Lupita2,SND-L6013R,SND-L6013R,10.1.1.128,00:00:00:00:00:00
+Loginco,Entrada Glosa,DH-IPC-HDBW2441E-S,AC0C277PAG76D96,10.1.1.71,sin MAC
+Loginco,Glosa,DH-IPC-PDW3849-A180-AS-PV,9G06ED6PAG31AA5,10.1.1.72,fc:5f:49:54:8b:0f
+Loginco,Entrada Glosa2,DH-IPC-HDBW2441E-S,AB0703CPAG90344,10.1.1.73,d4:43:0e:42:35:2e
+Loginco,NVR Planta Baja,DH-XVR1B08-I,8H0B75APAZ7E1B8,192.168.1.110,fc:b6:9d:71:51:df
+Loginco,Entrada ,dahua,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco,Cochera Principal,Night Owl,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco,Cochera Motos,Night Owl,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco,Elevador,dahua,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco,Porton,Night Owl,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco,Cochera Exterior,dahua,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco,Porton Calle,Night Owl,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco,Cochera interior,Night Owl,sin numero serie,0.0.0.0,00:00:00:00:00:00
+Loginco Bodega,NVR Bodega,,,0.0.0.0,00:00:00:00:00:00
 Esperanza 2,NVR Esperanza2,DHI-NVR5208-4KS2,BC01ED2PAJ59955,192.168.2.7,30:dd:aa:cb:32:31
 Esperanza 2,Garita Salida,DH-IPC-PFW3849S-A180-AS-PV,BJ110C6PAG8DD88,10.1.1.65,c4:aa:c4:eb:81:7f
 Esperanza 2,Int Garita Salida,DH-IPC-HDBW2841E-S,BH0AEF6PAGC5D9C,10.1.1.66,c4:aa:c4:9b:e6:b0

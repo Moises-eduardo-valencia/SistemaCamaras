@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -18,6 +20,8 @@ class Camara(models.Model):
     ip = models.GenericIPAddressField()
     mac = models.CharField(max_length=17)
 
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -27,4 +31,4 @@ class Camara(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return self.nombre
+        return self.empresa + ' - ' + self.nombre + ' - ' + self.modelo + ' - ' + self.serie 

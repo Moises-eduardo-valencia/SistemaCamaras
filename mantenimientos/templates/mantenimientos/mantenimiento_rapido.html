@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mantenimiento Rápido | {{ camara.nombre }}</title>
+  <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 min-h-screen flex items-start justify-center py-8 px-4">
+
+  <div class="bg-white shadow-lg rounded-xl w-full max-w-md">
+
+    <!-- Header -->
+    <div class="bg-blue-700 rounded-t-xl px-6 py-4 flex items-center gap-3">
+      <img src="/media/logotipo.png" alt="Logo" class="h-10 object-contain brightness-0 invert">
+      <div>
+        <p class="text-white font-bold text-lg leading-tight">Mantenimiento Rápido</p>
+        <p class="text-blue-200 text-xs">SistemaCamaras</p>
+      </div>
+    </div>
+
+    <!-- Info de la cámara -->
+    <div class="px-6 py-4 border-b bg-blue-50">
+      <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded mb-1">
+        {{ camara.empresa }}
+      </span>
+      <p class="text-gray-900 font-bold text-lg">{{ camara.nombre }}</p>
+      <p class="text-gray-500 text-sm">Serie: {{ camara.serie }}</p>
+    </div>
+
+    <form method="post" class="px-6 py-4 space-y-5">
+      {% csrf_token %}
+      <input type="hidden" name="camara" value="{{ camara.pk }}">
+      <input type="hidden" name="fecha_mantenimiento" value="{{ hoy|date:'Y-m-d' }}">
+      <input type="hidden" name="proxima_fecha" value="{{ proxima|date:'Y-m-d' }}">
+
+      <!-- Fechas (solo lectura) -->
+      <div class="grid grid-cols-2 gap-3 bg-gray-50 rounded-lg p-3 text-sm">
+        <div>
+          <p class="text-gray-500 text-xs mb-1">Fecha de hoy</p>
+          <p class="font-semibold text-gray-800">{{ hoy }}</p>
+        </div>
+        <div>
+          <p class="text-gray-500 text-xs mb-1">Próximo mantenimiento</p>
+          <p class="font-semibold text-green-700">{{ proxima }}</p>
+        </div>
+      </div>
+
+      <!-- Verificaciones -->
+      <div>
+        <p class="text-sm font-semibold text-gray-700 mb-3">Verificaciones realizadas</p>
+        <div class="space-y-3">
+          <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+            {{ form.limpieza_lente }}
+            <span class="text-sm text-gray-800">Limpieza de lente</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+            {{ form.limpieza_interior }}
+            <span class="text-sm text-gray-800">Limpieza interior</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+            {{ form.verificacion_conector }}
+            <span class="text-sm text-gray-800">Verificación de conector</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+            {{ form.verificacion_alimentacion }}
+            <span class="text-sm text-gray-800">Verificación de alimentación</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Observaciones -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Observaciones</label>
+        <textarea name="observaciones" rows="3"
+                  class="border border-gray-300 rounded-lg w-full p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Notas adicionales (opcional)..."></textarea>
+      </div>
+
+      <button type="submit"
+              class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
+        Registrar mantenimiento
+      </button>
+    </form>
+
+  </div>
+
+</body>
+</html>

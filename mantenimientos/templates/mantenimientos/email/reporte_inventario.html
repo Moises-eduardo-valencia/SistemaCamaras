@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"></head>
+<body style="font-family: Arial, sans-serif; background:#f4f4f4; margin:0; padding:20px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:700px; margin:0 auto; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+    <!-- Header -->
+    <tr>
+      <td style="background:#1e3a5f; padding:24px 30px;">
+        <p style="color:#ffffff; font-size:20px; font-weight:bold; margin:0;">Reporte de Inventario</p>
+        <p style="color:#a8c4e0; font-size:14px; margin:4px 0 0;">{{ empresa }} &mdash; {{ mes }}</p>
+      </td>
+    </tr>
+    <!-- Summary -->
+    <tr>
+      <td style="padding:16px 30px; background:#eaf1f8; border-bottom:1px solid #d0e3f0;">
+        <p style="margin:0; font-size:14px; color:#1e3a5f;">Total de cámaras registradas: <strong>{{ total }}</strong></p>
+      </td>
+    </tr>
+    <!-- Table -->
+    <tr>
+      <td style="padding:20px 30px;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-size:13px;">
+          <thead>
+            <tr style="background:#1e3a5f; color:#ffffff;">
+              <th style="padding:10px 12px; text-align:left;">Nombre</th>
+              <th style="padding:10px 12px; text-align:left;">Modelo</th>
+              <th style="padding:10px 12px; text-align:left;">Serie</th>
+              <th style="padding:10px 12px; text-align:left;">IP</th>
+              <th style="padding:10px 12px; text-align:left;">MAC</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for camara in camaras %}
+            <tr style="background:{% cycle '#f8f9fa' '#ffffff' %};">
+              <td style="padding:9px 12px; border-bottom:1px solid #e9ecef;">{{ camara.nombre }}</td>
+              <td style="padding:9px 12px; border-bottom:1px solid #e9ecef;">{{ camara.modelo }}</td>
+              <td style="padding:9px 12px; border-bottom:1px solid #e9ecef; font-family:monospace;">{{ camara.serie }}</td>
+              <td style="padding:9px 12px; border-bottom:1px solid #e9ecef; font-family:monospace;">{{ camara.ip }}</td>
+              <td style="padding:9px 12px; border-bottom:1px solid #e9ecef; font-family:monospace;">{{ camara.mac }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <!-- Footer -->
+    <tr>
+      <td style="background:#f4f4f4; padding:16px 30px; text-align:center; border-top:1px solid #e0e0e0;">
+        <p style="margin:0; font-size:12px; color:#888;">SistemaCamaras &mdash; Reporte generado automáticamente &mdash; {{ mes }}</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
